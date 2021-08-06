@@ -84,6 +84,9 @@ background-color:#48cae4;
 		text-align: center;
 		background-color:#48cae4;
   }
+		body{
+		font-size: 12px;
+	}
 .registered-address{
 	margin: 5%;
 }
