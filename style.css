@@ -5,11 +5,8 @@ body{
 	padding: 0;
 	margin: 0;
 	font-family: 'PT Serif', serif;
+	  text-align: justify;
 	
-}
-.p{
-	text-align: justify;
-        text-justify: inter-word;
 }
 .navbar-brand{
 	font-weight: bold;
