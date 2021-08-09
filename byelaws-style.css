@@ -3,9 +3,13 @@ body{
 	margin: 0;
 	font-family: 'Montserrat', sans-serif;
 }
-.p{
+.card-body{
 	text-align: justify;
-        text-justify: inter-word;
+  text-justify: inter-word;
+}
+.content{
+	text-align: justify;
+	text-justify: inter-word;
 }
 .section-1{
 	margin: 5%;
