@@ -105,20 +105,27 @@ export default function HomePage() {
               key={item.title}
               className="group overflow-hidden rounded-3xl border border-brand-pale/80 bg-white shadow-[0_24px_50px_-46px_rgba(3,4,94,0.7)] transition-transform duration-300 hover:-translate-y-1"
             >
-              <div className="flex aspect-[3/4] items-center justify-center bg-brand-mist">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={item.cover}
-                  alt={`${item.title} cover`}
-                  width={item.width}
-                  height={item.height}
-                  loading="lazy"
-                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-              </div>
-              <p className="px-5 py-4 font-display text-sm font-bold tracking-wide text-brand-deep">
-                {item.title}
-              </p>
+              <a
+                href={item.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="flex aspect-[3/4] items-center justify-center bg-brand-mist">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={item.cover}
+                    alt={`${item.title} cover`}
+                    width={item.width}
+                    height={item.height}
+                    loading="lazy"
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <p className="px-5 py-4 font-display text-sm font-bold tracking-wide text-brand-deep group-hover:text-brand">
+                  {item.title}
+                </p>
+              </a>
             </li>
           ))}
         </ul>

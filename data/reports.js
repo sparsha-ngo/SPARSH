@@ -4,18 +4,21 @@ export const annualReports = {
   items: [
     {
       title: "Annual Report 2022-23",
+      pdf: "/reports/annual-report-2022-23.pdf",
       cover: "/reports/annual-report-2022-23.jpg",
       width: 721,
       height: 1000,
     },
     {
       title: "Annual Report 2023-24",
+      pdf: "/reports/annual-report-2023-24.pdf",
       cover: "/reports/annual-report-2023-24.jpg",
       width: 708,
       height: 1000,
     },
     {
       title: "Annual Report 2024-25",
+      pdf: "/reports/annual-report-2024-25.pdf",
       cover: "/reports/annual-report-2024-25.jpg",
       width: 773,
       height: 1000,
