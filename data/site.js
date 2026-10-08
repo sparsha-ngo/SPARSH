@@ -16,6 +16,7 @@ export const site = {
     { label: "What do we do", href: "/#what-do" },
     { label: "Get Involved", href: "/#get-involved" },
     { label: "About Us", href: "/#about" },
+    { label: "Annual Reports", href: "/#annual-reports" },
     { label: "Memorandum", href: "/memorandum" },
     { label: "Bye-Laws", href: "/bye-laws" },
   ],

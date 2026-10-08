@@ -3,7 +3,7 @@ export default function SectionHeading({ title, id, tone = "dark", className = "
     <div className={`max-w-3xl ${className}`}>
       <h2
         id={id}
-        className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${
+        className={`scroll-mt-28 font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${
           tone === "light" ? "text-white" : "text-brand-deep"
         }`}
       >

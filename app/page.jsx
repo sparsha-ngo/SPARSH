@@ -1,6 +1,7 @@
 import Accordion from "@/components/Accordion";
 import SectionHeading from "@/components/SectionHeading";
 import { about, aimsAndObjects, getInvolved, hero, whatWeDo } from "@/data/home";
+import { annualReports } from "@/data/reports";
 import { site } from "@/data/site";
 
 export const metadata = {
@@ -94,6 +95,33 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-5 py-16 sm:py-20">
+        <SectionHeading id={annualReports.id} title={annualReports.title} />
+        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {annualReports.items.map((item) => (
+            <li
+              key={item.title}
+              className="group overflow-hidden rounded-3xl border border-brand-pale/80 bg-white shadow-[0_24px_50px_-46px_rgba(3,4,94,0.7)] transition-transform duration-300 hover:-translate-y-1"
+            >
+              <div className="flex aspect-[3/4] items-center justify-center bg-brand-mist">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={item.cover}
+                  alt={`${item.title} cover`}
+                  width={item.width}
+                  height={item.height}
+                  loading="lazy"
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
+              <p className="px-5 py-4 font-display text-sm font-bold tracking-wide text-brand-deep">
+                {item.title}
+              </p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section
