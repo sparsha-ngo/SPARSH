@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import DonateButton from "@/components/DonateButton";
 import { site } from "@/data/site";
 
 export default function SiteHeader() {
@@ -66,12 +67,7 @@ export default function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="hidden rounded-full bg-gradient-to-r from-brand to-brand-dark px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_24px_-14px_rgba(2,62,138,0.85)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-16px_rgba(2,62,138,0.9)] sm:inline-flex"
-          >
-            {site.donateLabel}
-          </button>
+          <DonateButton className="hidden rounded-full bg-gradient-to-r from-brand to-brand-dark px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_24px_-14px_rgba(2,62,138,0.85)] transition hover:-translate-y-0.5 hover:shadow-[0_18px_30px_-16px_rgba(2,62,138,0.9)] sm:inline-flex" />
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}
@@ -128,12 +124,7 @@ export default function SiteHeader() {
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            className="mt-3 w-full rounded-full bg-gradient-to-r from-brand to-brand-dark px-5 py-3 text-sm font-semibold text-white sm:hidden"
-          >
-            {site.donateLabel}
-          </button>
+          <DonateButton className="mt-3 w-full rounded-full bg-gradient-to-r from-brand to-brand-dark px-5 py-3 text-sm font-semibold text-white sm:hidden" />
         </nav>
       ) : null}
     </header>
