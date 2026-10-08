@@ -22,7 +22,7 @@ const inter = Inter({
 export const metadata = {
   title: "SPARSHA",
   description: hero.statement,
-  icons: { icon: "/images/Logo.ico" },
+  icons: { icon: "/images/sparsha-logo.png" },
 };
 
 export default function RootLayout({ children }) {

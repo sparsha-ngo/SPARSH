@@ -37,9 +37,9 @@ export default function SiteHeader() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/Logo.ico"
+            src="/images/sparsha-logo.png"
             alt=""
-            className="h-10 w-10 rounded-full ring-1 ring-brand-pale"
+            className="h-11 w-11 shrink-0 rounded-full"
           />
           <span className="font-display text-xl font-extrabold tracking-[0.22em] text-brand-deep transition-colors group-hover:text-brand">
             {site.name}

@@ -87,7 +87,7 @@ export const byeLaws = {
           type: "paragraph",
           text: "3.2) Logo of the society shall be as given below :",
         },
-        { type: "image", src: "/images/Logo.ico", alt: "logo" },
+        { type: "image", src: "/images/sparsha-logo.png", alt: "logo" },
       ],
     },
     {

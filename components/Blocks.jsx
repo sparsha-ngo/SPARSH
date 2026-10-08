@@ -103,7 +103,7 @@ export function Block({ block, depth = 0 }) {
         <img
           src={block.src}
           alt={block.alt}
-          className="h-24 w-24 rounded-full border border-brand-pale bg-white p-1"
+          className="h-32 w-32 rounded-full"
         />
       );
 

@@ -2,7 +2,6 @@ export const site = {
   name: "SPARSHA",
   fullName: "SOCIETY FOR PROMOTION OF SERVE HUMANITY AMONG YOUTHS",
   email: "sparsha.ngo.ani@gmail.com",
-  phone: "(+91)9434XXXXXX",
   registeredOffice: {
     lines: [
       "Shore Point Village, PO Bambooflat,",

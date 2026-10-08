@@ -10,9 +10,9 @@ export default function SiteFooter({ site = siteData }) {
             <div className="flex items-center gap-3">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/Logo.ico"
+                src="/images/sparsha-logo.png"
                 alt=""
-                className="h-10 w-10 rounded-full bg-white/10 p-0.5 ring-1 ring-white/30"
+                className="h-11 w-11 rounded-full bg-white p-0.5"
               />
               <h2 className="font-display text-2xl font-extrabold tracking-[0.22em]">
                 {site.name}
@@ -61,7 +61,6 @@ export default function SiteFooter({ site = siteData }) {
                   {site.email}
                 </a>
               </li>
-              <li>{site.phone}</li>
             </ul>
           </div>
 
