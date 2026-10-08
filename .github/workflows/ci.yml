@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Install from lockfile
+        run: npm ci
+
+      - name: Verify Next's vendored dependency is intact
+        run: node -e "const m = require('next/dist/compiled/fresh'); if (typeof m !== 'function') { throw new Error('next/dist/compiled/fresh did not resolve to a function'); } console.log('next/dist/compiled/fresh OK');"
+
+      - name: Build
+        run: npm run build
+
+      - name: Report installed versions
+        run: npm ls next react react-dom --depth=0
