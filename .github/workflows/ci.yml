@@ -28,15 +28,19 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Guard GoDaddy's 100 MB upload limit
+      - name: Verify static export output
         run: |
-          bytes=$(du -sb --exclude=node_modules --exclude=.next --exclude=.git --exclude=out --exclude=deploy . | cut -f1)
-          mib=$((bytes / 1048576))
-          echo "Deployment payload: ${mib} MiB (limit 100 MiB)"
-          if [ "$mib" -ge 100 ]; then
-            echo "::error::payload is over GoDaddy's 100 MB zip limit - compress the new reports (see README)"
+          test -f out/index.html || { echo "::error::out/index.html missing from static export"; exit 1; }
+
+      - name: Guard Cloudflare Pages 25 MiB single-file limit
+        run: |
+          oversized=$(find out -type f -size +25M)
+          if [ -n "$oversized" ]; then
+            echo "::error::Found files exceeding Cloudflare Pages 25 MiB single-file limit:"
+            echo "$oversized"
             exit 1
           fi
+          echo "All exported assets are within Cloudflare Pages 25 MiB limit."
 
       - name: Report installed versions
         run: npm ls next react react-dom --depth=0

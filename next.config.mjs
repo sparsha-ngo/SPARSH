@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Hosted on GoDaddy Node.js Hosting, which runs a persistent Node process:
-  // `next build` then `next start` (see package.json). No static export.
-  // Keep trailing slashes so URLs already indexed from the previous host still resolve.
+  // Hosted on Cloudflare Pages as a static export.
+  // Next.js compiles the entire application to HTML/CSS/JS into `out/`.
+  output: "export",
+  images: {
+    unoptimized: true,
+  },
+  // Keep trailing slashes so URLs (e.g. /bye-laws/) resolve cleanly to directory index.html.
   trailingSlash: true,
 };
 

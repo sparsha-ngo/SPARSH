@@ -1,7 +1,6 @@
 # SPARSHA
 
-NGO website — Next.js (App Router) with Tailwind CSS 4, hosted as a Node.js app
-on GoDaddy Node.js Hosting.
+NGO website — Next.js (App Router) with Tailwind CSS 4, hosted as a static site on Cloudflare Pages.
 
 ## Local development
 
@@ -13,71 +12,69 @@ npm run dev     # http://localhost:3000
 ## Production build
 
 ```bash
+npm run build   # Static HTML/CSS/JS export generated into `out/`
+```
+
+To preview the exported static build locally:
+
+```bash
+npx serve out
+# or with Wrangler:
+npx wrangler pages dev out
+```
+
+## Deploying to Cloudflare Pages
+
+The site is configured for **Next.js Static HTML Export** (`output: "export"` in `next.config.mjs`), which generates static assets into `out/` and serves them from Cloudflare's global edge network.
+
+### Option 1: Cloudflare Dashboard (Recommended — Git integration)
+
+1. Go to the [Cloudflare Dashboard](https://dash.cloudflare.com/) → **Workers & Pages** → **Create application** → **Pages** → **Connect to Git**.
+2. Select your repository (`sparsha-ngo/SPARSH`) and branch (`main`).
+3. Set the build configuration:
+   - **Framework preset**: `Next.js (Static HTML Export)`
+   - **Build command**: `npm run build`
+   - **Build output directory**: `out`
+   - **Root directory**: `/`
+4. Under **Environment variables**, set:
+   - `NODE_VERSION`: `22` (also provided via [.node-version](.node-version))
+5. Click **Save and Deploy**. Cloudflare will automatically build and deploy new pushes to `main`.
+
+### Option 2: Wrangler CLI
+
+You can deploy directly from your local terminal using Wrangler:
+
+```bash
+# Build the static export
 npm run build
-npm start       # `next start`, listens on $PORT (falls back to 3000)
+
+# Deploy to Cloudflare Pages
+npm run deploy
+# or: npx wrangler pages deploy out --project-name=sparsha
 ```
 
-## Deploying to GoDaddy Node.js Hosting
+The repository includes [wrangler.toml](wrangler.toml) pre-configured with `pages_build_output_dir = "out"`.
 
-The platform runs the project as a persistent Node process:
-**production install → `npm run build` → `npm start`**.
+### HTTP Headers & Security
 
-What this repo provides, per GoDaddy's published deploy contract
-(<https://github.com/godaddy/nodejs-hosting-agent-skill>):
-
-| Contract rule | How it is met |
-| --- | --- |
-| Root `package.json` with `name`, `version`, `main` | [package.json](package.json) — `main` is `next.config.mjs`, since a Next.js app's runtime entry is `next start`, not a file in `main` |
-| `build` and `start` scripts | `next build` and `next start` |
-| Every package needed for build **and** start in `dependencies` | Tailwind and PostCSS are in `dependencies`, not `devDependencies`, because the platform installs with devDependencies omitted *before* it builds |
-| Listen on `process.env.PORT` | `next start` reads `PORT`; it binds `0.0.0.0` |
-| Project-root `.npmrc` with the public registry | [.npmrc](.npmrc) |
-| Lockfile with public npm URLs only | [package-lock.json](package-lock.json) — regenerate after any dependency change so `npm ci` stays in sync |
-
-Check the app against the contract before uploading, using GoDaddy's own validator
-(from the repo above):
-
-```bash
-node validate-paas.mjs /path/to/project
-```
-
-### Uploading
-
-Build the zip in Git Bash, with `package.json` at the top level and the build
-outputs left out (the platform runs its own install and build):
-
-```bash
-cd /d/SPARSH
-/c/Windows/System32/tar.exe -a -c -f deploy/sparsha-godaddy.zip \
-  $(ls -A | grep -vxE 'node_modules|\.next|out|deploy|\.git|\.freebuff|Resources')
-```
-
-**Do not use Windows' `Compress-Archive`/Send-to-compressed-folder.** It writes
-backslash separators inside the zip (`app\page.jsx`), which the ZIP spec does not
-allow and a Linux host reads as literal filename characters — the app would
-arrive as a flat pile of oddly named files instead of a working project. bsdtar
-(`C:\Windows\System32\tar.exe`) writes forward slashes and is what was used here.
-
-Then upload the zip in the Node.js Hosting dashboard, or connect the Git
-repository and pull the branch. To ship an update, repeat the same step; the
-production build restarts on the new deployment. `deploy/` is git-ignored, so the
-current artifact (`deploy/sparsha-godaddy.zip`, 39 MB) is not committed.
+Custom HTTP headers for Cloudflare Pages are configured in [public/_headers](public/_headers) (copied into `out/_headers` at build time):
+- Long-term caching for immutable assets (`/_next/static/*`)
+- 7-day browser caching for PDFs and images
+- Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`)
 
 ### Cutover note
 
-GitHub Pages is *still publishing* this repository's legacy hand-written pages
-(`index.html`, `byelaws.html`) from the `main` branch root, and republishes them on
-every push — which is why the Memorandum page had to be deleted from those files
-too, not just from the Next.js app. They are kept only as a safety net while the
-new host is set up. Once the GoDaddy app answers on the domain, stop the old copy
-with **Settings → Pages → Source: None**.
+GitHub Pages was previously publishing this repository's legacy hand-written pages (`index.html`, `byelaws.html`) from the `main` branch root. Once Cloudflare Pages answers on your domain, stop the old GitHub Pages copy with **Settings → Pages → Source: None**.
 
-### Annual reports
+### Annual reports & asset limits
 
-The three annual-report PDFs in `public/reports/` are image-heavy — embedded
-images were 98% of their bytes, at up to 300 dpi — so they were reduced from
-**121 MB to 39 MB** with MuPDF's `mutool clean`, which subsamples colour and grey
-images to 150 dpi and re-encodes them as JPEG:
+Cloudflare Pages enforces a **25 MiB maximum limit per individual asset file**.
+The three annual-report PDFs in `public/reports/` are image-heavy and were compressed with MuPDF's `mutool clean`:
+- `annual-report-2022-23.pdf`: ~12.2 MiB
+- `annual-report-2023-24.pdf`: ~10.8 MiB
+- `annual-report-2024-25.pdf`: ~18.2 MiB
+
+All files are well within Cloudflare's 25 MiB limit. If you add a new annual report that exceeds 25 MiB, compress it using `mutool clean`:
 
 ```bash
 mutool clean -gggg -z -Z \
@@ -88,15 +85,10 @@ mutool clean -gggg -z -Z \
   in.pdf out.pdf && mv out.pdf in.pdf
 ```
 
-`mutool` is not a project dependency; it comes from the portable Windows zip at
-<https://mupdf.com/releases>. Run the same command on any newly added report, so
-the upload stays under GoDaddy's 100 MB zip limit — with the reports compressed a
-zip of this project is **39 MB**. Page counts, extracted text and page layout were
-verified unchanged (worst 1/16-page region differed by 7/255 at render time), and
-the full-resolution originals remain in git history if print-quality copies are
-ever needed.
+`mutool` comes from <https://mupdf.com/releases>.
 
 ## Checks
 
-There is no test runner or linter in this repo. The available checks are
-`npm run build` and GoDaddy's `validate-paas.mjs`.
+The available checks are:
+- `npm run build` — compiles and exports the app into `out/`
+- GitHub Actions CI in [.github/workflows/ci.yml](.github/workflows/ci.yml) — runs build and guards the Cloudflare Pages 25 MiB file size limit

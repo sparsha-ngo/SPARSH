@@ -2,14 +2,15 @@
   "name": "sparsha",
   "version": "1.0.0",
   "private": true,
-  "main": "next.config.mjs",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "pages:build": "next build",
+    "deploy": "npx wrangler pages deploy out"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
