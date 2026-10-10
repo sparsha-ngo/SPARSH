@@ -63,6 +63,15 @@ repository and pull the branch. To ship an update, repeat the same step; the
 production build restarts on the new deployment. `deploy/` is git-ignored, so the
 current artifact (`deploy/sparsha-godaddy.zip`, 39 MB) is not committed.
 
+### Cutover note
+
+GitHub Pages is *still publishing* this repository's legacy hand-written pages
+(`index.html`, `byelaws.html`) from the `main` branch root, and republishes them on
+every push — which is why the Memorandum page had to be deleted from those files
+too, not just from the Next.js app. They are kept only as a safety net while the
+new host is set up. Once the GoDaddy app answers on the domain, stop the old copy
+with **Settings → Pages → Source: None**.
+
 ### Annual reports
 
 The three annual-report PDFs in `public/reports/` are image-heavy — embedded
