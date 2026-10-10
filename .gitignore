@@ -1,6 +1,7 @@
 node_modules/
 .next/
 out/
+deploy/
 next-env.d.ts
 *.log
 .env*.local

@@ -28,5 +28,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Guard GoDaddy's 100 MB upload limit
+        run: |
+          bytes=$(du -sb --exclude=node_modules --exclude=.next --exclude=.git --exclude=out --exclude=deploy . | cut -f1)
+          mib=$((bytes / 1048576))
+          echo "Deployment payload: ${mib} MiB (limit 100 MiB)"
+          if [ "$mib" -ge 100 ]; then
+            echo "::error::payload is over GoDaddy's 100 MB zip limit - compress the new reports (see README)"
+            exit 1
+          fi
+
       - name: Report installed versions
         run: npm ls next react react-dom --depth=0
