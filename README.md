@@ -42,18 +42,18 @@ The site is configured for **Next.js Static HTML Export** (`output: "export"` in
 
 ### Option 2: Wrangler CLI
 
-You can deploy directly from your local terminal using Wrangler:
+You can deploy directly using Wrangler (or Cloudflare's build system running `wrangler deploy`):
 
 ```bash
 # Build the static export
 npm run build
 
-# Deploy to Cloudflare Pages
+# Deploy to Cloudflare
 npm run deploy
-# or: npx wrangler pages deploy out --project-name=sparsha
+# or: npx wrangler deploy
 ```
 
-The repository includes [wrangler.toml](wrangler.toml) pre-configured with `pages_build_output_dir = "out"`.
+The repository includes [wrangler.toml](wrangler.toml) configured with `[assets] directory = "./out"`.
 
 ### HTTP Headers & Security
 

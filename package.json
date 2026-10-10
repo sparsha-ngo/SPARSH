@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "pages:build": "next build",
-    "deploy": "npx wrangler pages deploy out"
+    "deploy": "npx wrangler deploy"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.3.3",
