@@ -1,7 +1,5 @@
 export const byeLaws = {
-  title: "Bye-Laws",
-  intro:
-    "Draft Bye Laws, privately circulated for inviting comments and suggestions.",
+  title: "Bye-law",
   sections: [
     {
       id: "1",
@@ -12,7 +10,7 @@ export const byeLaws = {
           items: [
             {
               label: "a)",
-              text: "These Bye Laws adopted in the General Body meeting of the Society held on XX/XX/2021, at XXXXXXX may be called the “Bye Laws of the SOCIETY FOR PROMOTION OF SERVE HUMANITY AMONG YOUTHS” (SPARSHA in short).",
+              text: "These Bye Laws adopted in the General Body meeting of the Society held on 29/07/2021, at Hotel Jazeeras, Hope Town may be called the “Bye Laws of the SOCIETY FOR PROMOTION OF SERVE HUMANITY AMONG YOUTHS” (SPARSHA in short).",
             },
             {
               label: "b)",

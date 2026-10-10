@@ -17,13 +17,9 @@ export const site = {
     { label: "Get Involved", href: "/#get-involved" },
     { label: "About Us", href: "/#about" },
     { label: "Annual Reports", href: "/#annual-reports" },
-    { label: "Memorandum", href: "/memorandum" },
-    { label: "Bye-Laws", href: "/bye-laws" },
+    { label: "Bye-law", href: "/bye-laws" },
   ],
-  documents: [
-    { label: "Memorandum of Association", href: "/memorandum" },
-    { label: "Bye-Laws", href: "/bye-laws" },
-  ],
+  documents: [{ label: "Bye-law", href: "/bye-laws" }],
   social: [
     { label: "WhatsApp", href: "#", icon: "whatsapp" },
     { label: "Facebook", href: "#", icon: "facebook" },
