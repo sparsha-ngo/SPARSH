@@ -62,9 +62,9 @@ Custom HTTP headers for Cloudflare Pages are configured in [public/_headers](pub
 - 7-day browser caching for PDFs and images
 - Security headers (`X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`)
 
-### Cutover note
+### GitHub Pages note
 
-GitHub Pages was previously publishing this repository's legacy hand-written pages (`index.html`, `byelaws.html`) from the `main` branch root. Once Cloudflare Pages answers on your domain, stop the old GitHub Pages copy with **Settings → Pages → Source: None**.
+If GitHub Pages was previously enabled on the repository (**Settings → Pages**), set **Source: None** to ensure traffic exclusively routes to Cloudflare.
 
 ### Annual reports & asset limits
 
