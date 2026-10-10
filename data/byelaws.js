@@ -10,7 +10,7 @@ export const byeLaws = {
           items: [
             {
               label: "a)",
-              text: "These Bye Laws adopted in the General Body meeting of the Society held on 29/07/2021, at Hotel Jazeeras, Hope Town may be called the “Bye Laws of the SOCIETY FOR PROMOTION OF SERVE HUMANITY AMONG YOUTHS” (SPARSHA in short).",
+              text: "These Bye-law adopted in the General Body meeting of the Society held on 29/07/2021, at Hotel Jazeeras, Hope Town may be called the “Bye-law of the SOCIETY FOR PROMOTION OF SERVE HUMANITY AMONG YOUTHS” (SPARSHA in short).",
             },
             {
               label: "b)",
